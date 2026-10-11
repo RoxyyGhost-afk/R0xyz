@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title></title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000}
+#screen{position:fixed;inset:0;background:#000;display:grid;place-items:center}
+video{width:100%;height:100%;object-fit:contain;background:#000;display:block}
+/* Harmless visual-only glitch styling */
+#scanlines{position:fixed;inset:0;pointer-events:none;opacity:.13;background:repeating-linear-gradient(to bottom,transparent 0px,transparent 3px,rgba(255,255,255,.18) 4px)}
+#glitch{position:fixed;inset:0;pointer-events:none;opacity:0;background:linear-gradient(90deg,transparent 0 17%,rgba(255,0,0,.12) 18% 19%,transparent 20% 72%,rgba(0,255,170,.09) 73% 74%,transparent 75%);animation:glitch 7s infinite steps(1)}
+@keyframes glitch{0%,91%,94%,100%{opacity:0;transform:translateX(0)}92%{opacity:.75;transform:translateX(3px)}93%{opacity:.35;transform:translateX(-4px)}}
+</style>
+</head>
+<body>
+<main id="screen"><video id="clip" autoplay muted loop playsinline preload="auto"><source src="Hello.mp4" type="video/mp4"></video></main>
+<div id="scanlines"></div><div id="glitch"></div>
+<script>
+const v=document.getElementById('clip');
+v.play().catch(()=>{});
+document.addEventListener('click',()=>{if(v.paused)v.play().catch(()=>{});},{once:true});
+</script>
+</body>
+</html>
